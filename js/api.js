@@ -1,59 +1,52 @@
 
-// function buscarPokemon () {
-//     let nombre = document.querySelector("#nombre").value;
-//     let tipo = document.querySelector("#tipo").value;
 
+const pokeCard = document.querySelector('#data-poke-card');
+const pokeName = document.querySelector('#data-poke-name');
+const pokeId = document.querySelector('#data-poke-id');
+const pokeTypes = document.querySelector('#data-poke-types');
+const pokeStats = document.querySelector('#data-poke-stats');
 
-// // "ALT + 96" PARA ESCRIBIR >> `` << (backticks)
+async function buscarPokemon(numero) {
+  try {
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${numero}`);
+    const data = await response.json();
 
+    // porner  el nombre del pokemon en la tarjeta de datos 
+    pokeName.textContent = data.name;
+    pokeId.textContent = data.id;
 
-function buscarPokemon() {
-    
-    fetch(`https://pokeapi.co/api/v2/pokemon/${numero}`)
-      .then(response => response.json())
-      .then(data => {
+    // limpiar types y stats
+    pokeTypes.innerHTML = '';
+    pokeStats.innerHTML = '';
 
-        const pokeName = document.querySelector('#data-poke-name');
-        pokeName.innerHTML = `<h1>${data[numero].name}<h1/>`;
+    // agregar types
+    data.types.forEach(type => {
+      const typeDiv = document.createElement('div');
+      typeDiv.textContent = type.type.name;
+      pokeTypes.appendChild(typeDiv);
+    });
 
-        const pokeId = document.querySelector('#data-poke-id');
-        pokeId.innerHTML = `<h1>${data[numero].id}</h1>`;
+    // agrega el  valor a las estats
+    data.stats.forEach(stat => {
+      const statDiv = document.createElement('div');
+      statDiv.textContent = stat.stat.name;
 
-        const pokeTypes = document.querySelector('#data-poke-types');
-        pokeTypes.innerHTML = "";
-        types.forEach(type => {
-          let tipoDiv = document.createElement("div");
-          tipoDiv.textContent = type.type.name;
-          pokeTypes.appendChild(tipoDiv);
-        })
+      const amountDiv = document.createElement('div');
+      amountDiv.textContent = stat.base_stat;
 
-        const pokeStats = document.querySelector('#data-poke-stats');
-        pokeStats.innerHTML = "";
-        stats.forEach(stat => {
-          let estadisticaDiv = document.createElement("div");
-          estadisticaDiv.classList.add("stat");
-        
-  
-          let nameDiv = document.createElement("div");
-          nameDiv.textContent = stat.stat.name;
-          estadisticaDiv.appendChild(nameDiv);
-          
-          let amountDiv = document.createElement("div");
-          amountDiv.textContent = stat.base_stat;
-          estadisticaDiv.appendChild(amountDiv);
-  
-          pokeStats.appendChild(estadisticaDiv);
-        });
-      
-      
-      }); 
-        
-      //se capturan bien los datos, pro no se muestran en el html!!
-      console.log(data[numero].name);
-      console.log(data[numero].id);
-      console.log(data[numero].id);
-      console.log(data[numero].stats);
-      console.log(data[numero].types);
-      
+      const statContainer = document.createElement('div');
+      statContainer.appendChild(statDiv);
+      statContainer.appendChild(amountDiv);
 
+      pokeStats.appendChild(statContainer);
+
+    });
+
+    //modificar estado del section para hacerlo visible, y borrar contenido del inputText
+    document.getElementById("skills-description").style.display="block";
+    inputText.value ="";
+
+  } catch (error) {
+    console.error(error);
+  }
 }

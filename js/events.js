@@ -8,22 +8,27 @@ const resultText = document.getElementById('resultText')
 
 function agregarEventos() {
   reload.addEventListener("click", restart);
+ 
 
-  send.onclick = function() {
+  send.onclick = () => {
     const inputText = document.getElementById('inputText').value
     const pokemon = data[numero].name
 
     if(inputText === "") {
       alert("No has escrito nada")
     } else {
+      
+
       cantidadEncuestados++
       sessionStorage.setItem('cantidadEncuestados', cantidadEncuestados);
 
-      buscarPokemon()
-
+     
       if (inputText.toLowerCase() === pokemon.toLowerCase()) {
         cantidadAcertados++
-
+        buscarPokemon(numero+1)
+        
+         
+        
         
 
         sessionStorage.setItem('cantidadAcertados', cantidadAcertados);
@@ -35,11 +40,15 @@ function agregarEventos() {
       }
     }
 
+    
+    // // "ALT + 96" PARA ESCRIBIR >> `` << (backticks)
+
     const porcentajeAcertados = Math.round((cantidadAcertados / cantidadEncuestados) * 100)
     const leyendaPuntaje = document.getElementById('puntaje')
 
     leyendaPuntaje.textContent = `Puntaje: ${cantidadAcertados} de ${cantidadEncuestados}`
     leyendaPuntaje.classList.toggle('puntajeBajo', porcentajeAcertados < 50)
+    
   }
 }
 
