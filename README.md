@@ -1,4 +1,6 @@
 # poketrivia.github.io
+https://alan-damian.github.io/poketrivia.github.io/
+
 
 _En esta trivia pondras a prueba tu capacidad de reconocer pokemons._
 
