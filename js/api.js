@@ -1,6 +1,7 @@
 
 
-const pokeCard = document.querySelector('#data-poke-card');
+
+
 const pokeName = document.querySelector('#data-poke-name');
 const pokeId = document.querySelector('#data-poke-id');
 const pokeTypes = document.querySelector('#data-poke-types');
@@ -10,6 +11,9 @@ async function buscarPokemon(numero) {
   try {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${numero}`);
     const data = await response.json();
+
+
+
 
     // porner  el nombre del pokemon en la tarjeta de datos 
     pokeName.textContent = data.name;
@@ -39,6 +43,8 @@ async function buscarPokemon(numero) {
       statContainer.appendChild(amountDiv);
 
       pokeStats.appendChild(statContainer);
+
+      
 
     });
 

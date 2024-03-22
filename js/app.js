@@ -5,6 +5,7 @@ let cantidadEncuestados = sessionStorage.getItem('cantidadEncuestados');
 
 const data = JSON.parse(jsonData);
 
+
 function restart() {
 
     const txtResult = document.getElementById("resultText");
@@ -17,16 +18,19 @@ function restart() {
     // mostrar  el pokemon a buscar en la página
     console.log("pokemon-->> " + data[numero].name + " <<--" );
     
-    const imgpokemon = document.getElementById("imgpokemon");
+    const pokeimg  = new Pokemon(data[numero].id);
+    imgpokemon.src = pokeimg.thumbnail;
+    
+    //mostrar imagen del pokemon
+    console.log(`imagen del pokemon: ${pokeimg.thumbnail}`)
 
-
-
-    imgpokemon.src = data[numero].thumbnail;
     txtResult.innerHTML = "";
     
     document.getElementById("skills-description").style.display="none";
 
 }
+
+
 
 function agregarEventos() {
 }

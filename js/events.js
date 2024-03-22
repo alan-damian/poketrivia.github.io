@@ -13,6 +13,7 @@ function agregarEventos() {
   send.onclick = () => {
     const inputText = document.getElementById('inputText').value
     const pokemon = data[numero].name
+    const pokeId = data[numero].id
 
     if(inputText === "") {
       alert("No has escrito nada")
@@ -50,6 +51,7 @@ function agregarEventos() {
     leyendaPuntaje.classList.toggle('puntajeBajo', porcentajeAcertados < 50)
     
   }
+
 }
 
 agregarEventos()
